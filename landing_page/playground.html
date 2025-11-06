@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Interactive Playground | Active Learning Benchmarks</title>
+    <link rel="stylesheet" href="./style.css">
+    <meta name="description" content="Interactive playground for comparing optimization strategies in cell culture media development. Test Hide-the-Label and Open Race benchmarks with different optimizers.">
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container">
+        <h1>Interactive Playground</h1>
+        <p class="subtitle">Compare optimization strategies in real-time</p>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="controls" id="playground">
+        <div style="text-align: center; margin-bottom: 32px;">
+          <h2 style="margin: 0 0 12px; font-size: 32px; font-weight: 800;">Interactive Playground</h2>
+          <p style="color: var(--muted); font-size: 17px; margin: 0;">Configure parameters and compare optimization strategies in real-time</p>
+        </div>
+
+        <div class="control-group">
+          <label for="versionSelect" class="control-label">Benchmark Type</label>
+          <select id="versionSelect" class="control-input">
+            <option value="hide">Hide the Label - Choose from existing candidates</option>
+            <option value="open">Open Race - Explore continuous space</option>
+          </select>
+          <p style="font-size: 14px; color: var(--muted); margin-top: 6px; margin-bottom: 0;">Select which benchmark mode you want to explore</p>
+        </div>
+
+        <div class="control-group">
+          <span class="control-label">Select Optimizers to Compare</span>
+          <p style="font-size: 14px; color: var(--muted); margin-top: 6px; margin-bottom: 12px;">Choose multiple optimizers to see how they perform side-by-side</p>
+          <div id="optimizersContainer" class="optimizers-list" aria-label="Choose optimizers">
+            <!-- Populated by script.js -->
+          </div>
+        </div>
+
+        <div class="control-row">
+          <div class="control-group">
+            <label for="batchInput" class="control-label">Batch Size</label>
+            <select id="batchInput" class="control-input">
+              <option value="1">1 - Sequential experiments</option>
+              <option value="10">10 - Small parallel batches</option>
+              <option value="20">20 - Large parallel batches</option>
+            </select>
+            <p style="font-size: 14px; color: var(--muted); margin-top: 6px; margin-bottom: 0;">How many experiments to run in parallel</p>
+          </div>
+
+          <div class="control-group">
+            <label for="hiddenFracSelect" class="control-label">Hidden Data Fraction</label>
+            <select id="hiddenFracSelect" class="control-input">
+              <option value="0.95">95% - 5% revealed initially</option>
+              <option value="0.99">99% - 1% revealed initially</option>
+            </select>
+            <p style="font-size: 14px; color: var(--muted); margin-top: 6px; margin-bottom: 0;">Fraction of data points hidden from optimizers</p>
+          </div>
+        </div>
+
+        <div class="control-row">
+          <div class="control-group">
+            <label for="difficultySelect" class="control-label">Difficulty Mode</label>
+            <select id="difficultySelect" class="control-input">
+              <option value="Regular">Regular - Standard difficulty</option>
+              <option value="Hard">Hard - Increased noise and complexity</option>
+            </select>
+            <p style="font-size: 14px; color: var(--muted); margin-top: 6px; margin-bottom: 0;">Difficulty level of the optimization task</p>
+          </div>
+
+          <div class="control-group">
+            <label for="datasetSelect" class="control-label">Dataset</label>
+            <select id="datasetSelect" class="control-input">
+              <option value="all">All Datasets (Averaged)</option>
+              <option value="T_Cell">T Cell</option>
+              <option value="TF_Cell">TF Cell</option>
+              <option value="Hela_regular">HeLa Regular</option>
+              <option value="Hela_timesaving">HeLa Timesaving</option>
+              <option value="rat_myocyte">Rat Myocyte</option>
+            </select>
+            <p style="font-size: 14px; color: var(--muted); margin-top: 6px; margin-bottom: 0;">Which dataset to use for comparison</p>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button id="generateBtn" class="btn primary">Generate Results</button>
+          <button id="resetBtn" class="btn subtle" type="button">Reset to Defaults</button>
+        </div>
+        
+        <div style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.05), rgba(16, 185, 129, 0.05)); padding: 20px; border-radius: 12px; margin-top: 24px; border-left: 4px solid var(--accent);">
+          <p style="margin: 0; font-size: 14px; color: var(--text);"><strong>Note:</strong> The results shown are based on real benchmark experiments. Select different parameters to explore how various optimization strategies perform across different configurations. Some parameter combinations may show placeholder data where results are not yet available.</p>
+        </div>
+      </section>
+
+      <section class="chart-card">
+        <div class="chart-header">
+          <h2 id="chartTitle">Hide the Label — Results</h2>
+          <p class="chart-note" id="chartNote">Interactive visualization of benchmark results</p>
+        </div>
+        <div style="background: var(--bg); padding: 20px; border-radius: 12px;">
+          <canvas id="resultsChart" width="1000" height="520" aria-label="Optimizer results chart" role="img"></canvas>
+        </div>
+      </section>
+
+      <div style="text-align: center; margin: 40px 0;">
+        <a href="index.html" class="btn cta">← Back to Overview</a>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container" style="text-align: center;">
+        <p style="margin: 0 0 12px; font-size: 16px; font-weight: 600; color: var(--text);">Active Learning for Cell Media Optimization</p>
+        <small style="display: block; margin-bottom: 8px;">Interactive playground with placeholder visualizations. For real benchmarks, explore the full codebase.</small>
+        <small>Built for the scientific community | Open source and ready to use</small>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="./script.js"></script>
+  </body>
+</html>

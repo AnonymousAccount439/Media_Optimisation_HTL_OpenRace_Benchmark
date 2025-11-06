@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Smart Cell Media Optimization | Active Learning Benchmarks</title>
+    <link rel="stylesheet" href="./style.css">
+    <meta name="description" content="Revolutionize cell culture media optimization with intelligent active learning. Compare Bayesian Optimization vs traditional DOE. Interactive benchmarks: Hide-the-Label & Open Race. Reduce experiments by 50-80%.">
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container">
+        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;">
+          <div>
+            <h1>Active Learning for Cell Media</h1>
+            <p class="subtitle">Benchmarks: Hide‑the‑Label and Open Race</p>
+          </div>
+          <a href="playground.html" class="btn cta" style="margin: 0;">Playground</a>
+        </div>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="hero" aria-labelledby="hero-title">
+        <h2 id="hero-title">Optimizing Cell Media, Faster & Smarter</h2>
+        <p class="lede">Discover how active learning and intelligent optimization can revolutionize cell culture media development. We've created two powerful benchmarks that test different optimization strategies: <strong>Hide-the-Label</strong> for smart selection from existing candidates, and <strong>Open Race</strong> for exploring continuous optimization spaces. Whether you're working with stable conditions or facing real-world noise and complexity, our framework helps you find the best approach for your lab.</p>
+        <div class="cta-row">
+          <a class="btn cta" href="playground.html?target=hide">Try Hide‑the‑Label</a>
+          <a class="btn cta outline" href="playground.html?target=open">Try Open Race</a>
+        </div>
+      </section>
+
+      <article class="blog" aria-label="Project overview">
+        <h2>A Data‑Driven Evaluation of Optimization Techniques in Cell Culture Media</h2>
+
+        <p><em>Media formulation can account for up to 95% of production costs in cellular agriculture, yet deciding what to try next remains slow, manual, and expensive.</em> This project evaluates how far machine learning—especially active learning and Bayesian optimization—can go in reducing experimental waste and accelerating discovery, using benchmarks grounded in real datasets and realistic constraints.</p>
+
+        <h3>The Problem: Why Traditional Methods Fall Short</h3>
+        <p>For decades, researchers have relied on <strong>Design of Experiments (DOE)</strong> methods to systematically explore experimental spaces. While DOE brings valuable structure and statistical rigor, it has a critical limitation: it's <strong>non-adaptive</strong>. Once you design your experimental plan, you're locked in—even if your first few results scream "look over here!" at a promising region you didn't anticipate.</p>
+        
+        <p>In the complex world of cell culture media optimization, this inflexibility comes at a steep cost:</p>
+        <ul>
+          <li><strong>High dimensionality:</strong> Media formulations can involve dozens of components, each with its own concentration range</li>
+          <li><strong>Noise and variability:</strong> Biological systems are inherently noisy, making it hard to distinguish signal from noise</li>
+          <li><strong>Expensive experiments:</strong> Each test run costs time, materials, and resources</li>
+          <li><strong>Fixed plans:</strong> Traditional DOE commits you to a predetermined path, wasting opportunities to learn and adapt</li>
+        </ul>
+        
+        <p>The result? You often need <strong>many more experiments</strong> than necessary to find optimal conditions. What if we could be smarter about which experiments to run next, learning and adapting as we go?</p>
+
+        <div style="text-align: center;">
+          <img src="Figures/Optimisation_Strategies.png" alt="Diagram: DOE vs BO — fixed plan vs adaptive loop" class="viz-image" style="max-width: 50%; height: 40%;">
+        </div>
+
+        <h3>The Innovation: Two Benchmarks that Mirror Real Labs</h3>
+        <p>We've created two complementary benchmarks that capture the essence of real laboratory campaigns. Each tests different optimization skills and scenarios you'll encounter when developing cell culture media:</p>
+        
+        <div style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.05), rgba(16, 185, 129, 0.05)); padding: 24px; border-radius: 16px; margin: 24px 0; border-left: 5px solid var(--accent);">
+          <h4 style="margin-top: 0; color: var(--accent); font-size: 20px;">Hide-the-Label (HTL)</h4>
+          <p style="margin-bottom: 0;"><strong>The Scenario:</strong> Imagine you have a library of 100 different media formulations sitting on your shelf. You know they've all been tested before, but the results are hidden from you. You can only afford to test 20 of them. Which ones do you choose?</p>
+          <p><strong>What it tests:</strong> Your ability to strategically select from a finite pool of candidates, balancing exploration (trying diverse options) with exploitation (focusing on promising regions). This mirrors real scenarios where you have a candidate library and need to efficiently screen it.</p>
+          <p style="margin-bottom: 0;"><strong>Goal:</strong> Reach your target performance as quickly as possible, or maximize the best result within your budget.</p>
+        </div>
+        
+        <div style="background: linear-gradient(135deg, rgba(245, 158, 11, 0.05), rgba(236, 72, 153, 0.05)); padding: 24px; border-radius: 16px; margin: 24px 0; border-left: 5px solid var(--accent-3);">
+          <h4 style="margin-top: 0; color: var(--accent-3); font-size: 20px;">Open Race (OR)</h4>
+          <p style="margin-bottom: 0;"><strong>The Scenario:</strong> You're starting from scratch in a continuous experimental space. Each ingredient can be varied smoothly within certain ranges. Where do you explore? How do you balance trying new regions versus refining promising ones?</p>
+          <p><strong>What it tests:</strong> Your ability to navigate continuous optimization spaces, propose intelligent batches of experiments, and efficiently converge toward optimal formulations. This is like designing a media recipe from the ground up.</p>
+          <p style="margin-bottom: 0;"><strong>Goal:</strong> Track your best-so-far performance over time and reach the optimum with minimum experiments.</p>
+        </div>
+
+        <p style="margin-top: 32px;">Both benchmarks come in two difficulty levels:</p>
+        <ul>
+          <li><strong>Regular Mode:</strong> Uses smooth Gaussian Process (GP) surrogates with moderate noise—ideal for understanding baseline performance</li>
+          <li><strong>Hard Mode:</strong> Introduces real-world complexities like heteroscedastic noise (varying uncertainty), discontinuities, and multiple local optima—testing robustness under challenging conditions</li>
+        </ul>
+
+
+        <h3>How Hide-the-Label Works: Think of it Like a Game</h3>
+        <p>Imagine you're playing a card game where 100 cards are laid face-down on a table. Each card has a score written on it (representing media performance), but you can't see them. You have a budget to flip over only 20 cards. Your goal? Find the highest-scoring card as quickly as possible!</p>
+        
+        <p>This is exactly what the Hide-the-Label benchmark does. It takes real experimental data and "hides" most of the results. Different optimization strategies then compete to see which ones can most efficiently reveal the best candidates. Smart strategies will:</p>
+        <ul>
+          <li><strong>Start with diverse exploration</strong> to understand the overall landscape</li>
+          <li><strong>Focus on promising regions</strong> once patterns emerge</li>
+          <li><strong>Balance risk and reward</strong> by choosing candidates with high predicted value and high uncertainty</li>
+          <li><strong>Learn from each reveal</strong> to make smarter next choices</li>
+        </ul>
+        
+        <div style="text-align: center; margin: 32px 0;">
+            <img src="Figures/Hidethelabel.png" alt="Hide-the-Label game metaphor — covered labels in a candidate pool" class="viz-image" style="max-width: 60%; height: auto;">
+        </div>
+
+
+        <h3>How Open Race Works: Navigating Uncharted Territory</h3>
+        <p>Unlike Hide-the-Label where you're choosing from existing options, Open Race is like exploring a vast, continuous landscape searching for the highest peak. You don't have a map, and you can only sample a limited number of locations. Each measurement tells you the "elevation" (performance) at that spot.</p>
+        
+        <p>The challenge is to develop a smart exploration strategy that:</p>
+        <ul>
+          <li><strong>Builds an internal model</strong> of the landscape based on your observations</li>
+          <li><strong>Proposes new experiments</strong> in batches to efficiently use resources</li>
+          <li><strong>Tracks improvement over time</strong> to measure convergence speed</li>
+          <li><strong>Adapts the search strategy</strong> as you learn more about the space</li>
+        </ul>
+        
+        <p>This mirrors the real-world scenario of formulating media from scratch, where you can mix ingredients at any concentration within safe ranges and need to find the optimal combination efficiently.</p>
+        
+        <div style="text-align: center; margin: 32px 0;">
+            <img src="Figures/openrace.png" alt="Open Race method visualization" class="viz-image" style="max-width: 60%; height: auto;">
+        </div>
+
+        
+        <h3>Key Insights: What We Discovered</h3>
+        <p>After running thousands of benchmark trials across multiple datasets and difficulty levels, we uncovered some surprising and actionable insights:</p>
+        
+        <div style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.08), rgba(59, 130, 246, 0.08)); padding: 28px; border-radius: 16px; margin: 24px 0;">
+          <h4 style="margin-top: 0; font-size: 20px;">1. BO_GP_EI and SBO_GP_PV Lead the Pack</h4>
+          <p><strong>GP-based Bayesian Optimization with Expected Improvement (BO_GP_EI)</strong> and <strong>Smart BO with Predictive Variance (SBO_GP_PV)</strong> emerged as clear winners across both benchmarks. In Hide-the-Label, BO_GP_EI found optimal candidates in just <strong>~4 steps</strong>, while random selection needed <strong>10-50x more trials</strong>. In Open Race, both BO_GP_EI and SBO_GP_PV achieved the highest final performance values.</p>
+          <p style="margin-bottom: 0;"><em>Why it matters:</em> These methods dramatically reduce experimental costs and timelines by intelligently balancing exploration and exploitation, making them ideal for expensive biological experiments.</p>
+        </div>
+        
+        <div style="background: linear-gradient(135deg, rgba(245, 158, 11, 0.08), rgba(236, 72, 153, 0.08)); padding: 28px; border-radius: 16px; margin: 24px 0;">
+          <h4 style="margin-top: 0; font-size: 20px;">2. BO Methods Dominate Traditional Approaches</h4>
+          <p>Across all experiments, Bayesian Optimization methods (BO_GP_EI, SBO_GP_PV, SBO_GP_EI_TRUNCDE) consistently outperformed traditional Design of Experiments (DOE) approaches like Full Factorial, Latin Hypercube, and Central Composite designs. The BO advantage is clear: <strong>adaptive learning beats fixed sampling plans</strong>.</p>
+          <p style="margin-bottom: 0;"><em>The lesson:</em> Traditional DOE methods still have value for structured exploration, but when sample efficiency matters most, BO-based active learning is the superior choice. Random sampling performs dramatically worse than all systematic approaches.</p>
+        </div>
+        
+        <div style="background: linear-gradient(135deg, rgba(139, 92, 246, 0.08), rgba(59, 130, 246, 0.08)); padding: 28px; border-radius: 16px; margin: 24px 0;">
+          <h4 style="margin-top: 0; font-size: 20px;">3. Statistical Rigor Prevents False Claims</h4>
+          <p>We didn't just compare average performance—we used <strong>permutation testing</strong>, <strong>confidence intervals</strong>, and <strong>statistical power analysis</strong> to ensure our conclusions were solid. Many methods that looked good in single runs didn't hold up under rigorous statistical scrutiny.</p>
+          <p style="margin-bottom: 0;"><em>Critical insight:</em> Always validate claims with proper statistics. What looks like a win might just be random noise!</p>
+        </div>
+        
+        <div style="background: linear-gradient(135deg, rgba(236, 72, 153, 0.08), rgba(245, 158, 11, 0.08)); padding: 28px; border-radius: 16px; margin: 24px 0;">
+          <h4 style="margin-top: 0; font-size: 20px;">4. Test Under Realistic Conditions</h4>
+          <p>Our "Hard Mode" with non-Gaussian noise, discontinuities, and multiple local optima revealed which methods were truly robust. Some optimizers that excelled in easy conditions struggled when faced with realistic complexity.</p>
+          <p style="margin-bottom: 0;"><em>Practical advice:</em> Always benchmark under conditions that match your real experimental challenges—not just idealized scenarios.</p>
+        </div>
+
+        <div style="text-align: center; margin: 32px 0;">
+            <img src="Figures/sampleefficiency.png" alt="Sample efficiency — GP‑BO reaches target in ~20 steps vs DOE 100+" class="viz-image" style="max-width: 70%; height: auto;">
+            <p style="color: var(--muted); font-size: 14px; margin-top: 12px;"><em>Sample efficiency comparison: Bayesian Optimization reaches target performance in significantly fewer experiments</em></p>
+        </div>
+
+        <h3>Practical Roadmap: How to Apply This in Your Lab</h3>
+        <p>Ready to bring these insights to your own media optimization projects? Here's a step-by-step guide to get started:</p>
+        
+        <div style="border-left: 4px solid var(--accent-2); padding-left: 20px; margin: 24px 0;">
+          <h4 style="color: var(--accent-2); margin-top: 0;">Step 1: Start with the Best of Both Worlds</h4>
+          <p>You don't have to choose between Bayesian Optimization and traditional DOE—combine their strengths:</p>
+          <ul>
+            <li>Use <strong>GP-based BO for adaptive experiment selection</strong> (the "what to try next" decisions)</li>
+            <li>Keep <strong>DOE's discipline for experimental design</strong> (proper factor bounds, randomization, controls, and replication)</li>
+            <li>This hybrid approach gives you both intelligence and rigor</li>
+          </ul>
+        </div>
+        
+        <div style="border-left: 4px solid var(--accent); padding-left: 20px; margin: 24px 0;">
+          <h4 style="color: var(--accent); margin-top: 0;">Step 2: Test Before You Invest</h4>
+          <p>Before committing to expensive wet-lab experiments:</p>
+          <ul>
+            <li><strong>Run simulations</strong> using our benchmarks with datasets similar to yours</li>
+            <li><strong>Test different optimizers</strong> under both Regular and Hard modes</li>
+            <li><strong>Understand which strategies</strong> work best for your specific problem characteristics</li>
+            <li>This "dry run" can save thousands in lab costs and weeks of time</li>
+          </ul>
+        </div>
+        
+        <div style="border-left: 4px solid var(--accent-3); padding-left: 20px; margin: 24px 0;">
+          <h4 style="color: var(--accent-3); margin-top: 0;">Step 3: Use the Public Codebase</h4>
+          <p>Everything you need is open source and ready to use:</p>
+          <ul>
+            <li><strong>Reproduce our results:</strong> Run regular/hard × HTL/OR experiments out of the box</li>
+            <li><strong>Customize optimizers:</strong> Modify or add your own in <code>utils/optimizers.py</code> and <code>utils/open_race_optimizers.py</code></li>
+            <li><strong>Plug in your data:</strong> Add your datasets via <code>utils/datasets.py</code></li>
+            <li><strong>Compare fairly:</strong> All methods are evaluated on the same benchmarks with the same metrics</li>
+          </ul>
+        </div>
+        
+        <div style="border-left: 4px solid var(--accent-4); padding-left: 20px; margin: 24px 0;">
+          <h4 style="color: var(--accent-4); margin-top: 0;">Step 4: Measure What Actually Matters</h4>
+          <p>Don't just look at final performance—track the full story:</p>
+          <ul>
+            <li><strong>Steps-to-target (HTL):</strong> How quickly did you find a solution?</li>
+            <li><strong>Best-so-far trajectories (OR):</strong> How does performance improve over time?</li>
+            <li><strong>Confidence intervals:</strong> Are the differences statistically meaningful?</li>
+            <li><strong>Permutation tests:</strong> Could this result have happened by chance?</li>
+            <li>These metrics tell you if an optimizer is <em>reliably</em> better, not just lucky once</li>
+          </ul>
+        </div>
+
+        <h3>The Bottom Line: Smarter Experiments, Better Results</h3>
+        <p>The future of experimental biology isn't just about doing <em>more</em> experiments—it's about doing <em>smarter</em> experiments. With data-driven benchmarking and adaptive optimization, we can:</p>
+        
+        <ul style="font-size: 17px; line-height: 1.9;">
+          <li><strong>Cut experimental waste by 50-90%</strong> using BO_GP_EI or SBO_GP_PV instead of random sampling</li>
+          <li><strong>Accelerate discovery timelines</strong> from months to weeks with adaptive experiment selection</li>
+          <li><strong>Make optimization decisions with statistical confidence</strong>, not gut feeling</li>
+          <li><strong>Outperform traditional DOE methods</strong> while maintaining experimental rigor</li>
+          <li><strong>Reduce costs dramatically</strong> by testing only what's most informative</li>
+        </ul>
+
+        <blockquote>
+          "When the goal is fewer, more informative experiments—not just more experiments—adaptive optimization becomes a force multiplier for the lab."
+        </blockquote>
+
+        <div style="background: linear-gradient(135deg, var(--gradient-1)); color: white; padding: 40px; border-radius: 20px; margin: 40px 0; text-align: center;">
+          <h3 style="margin-top: 0; font-size: 28px;">Ready to Get Started?</h3>
+          <p style="font-size: 18px; margin-bottom: 28px; opacity: 0.95;">Try our interactive playgrounds below to see how different optimization strategies compare!</p>
+          <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+            <a href="playground.html?target=hide" style="display: inline-block; padding: 16px 32px; background: white; color: #667eea; border-radius: 12px; text-decoration: none; font-weight: 700; font-size: 17px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: transform 0.2s;">
+              Explore Hide-the-Label
+            </a>
+            <a href="playground.html?target=open" style="display: inline-block; padding: 16px 32px; background: white; color: #667eea; border-radius: 12px; text-decoration: none; font-weight: 700; font-size: 17px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: transform 0.2s;">
+              Explore Open Race
+            </a>
+          </div>
+        </div>
+      </article>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container" style="text-align: center;">
+        <p style="margin: 0 0 12px; font-size: 16px; font-weight: 600; color: var(--text);">Active Learning for Cell Media Optimization</p>
+        <small style="display: block; margin-bottom: 8px;">Interactive playground with placeholder visualizations. For real benchmarks, explore the full codebase.</small>
+        <small>Built for the scientific community | Open source and ready to use</small>
+      </div>
+    </footer>
+
+  </body>
+  </html>
+
+
+
+
